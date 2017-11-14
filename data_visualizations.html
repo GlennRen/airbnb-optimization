@@ -1,363 +1,363 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<title>Data Visualizations</title>
-		<link rel="stylesheet" href="css/bulma.css">
-		<link rel="stylesheet" href="css/style.css">
-		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-		<script src="http://d3js.org/d3.v3.min.js"></script>
-	</head>
-	<body>
+<head>
+	<title>Data Visualizations</title>
+	<link rel="stylesheet" href="css/bulma.css">
+	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
 
-		<div class="content-block">
-			<section class="hero">
-				<div class="hero-body">
-					<div class="container">
-						<div class="content">
-							<h4 class="title is-4">Nightly Prices</h4>
-							<div class="main-text">
-								<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-								<ul>
-									<li>Operating System x.x</li>
-									<li>Programming Language x.x</li>
-									<li>Module x.x</li>
-								</ul>
-								<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed. Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-							</div>
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Nightly Prices</h4>
+						<div class="main-text">
+							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
+							<ul>
+								<li>Operating System x.x</li>
+								<li>Programming Language x.x</li>
+								<li>Module x.x</li>
+							</ul>
+							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed. Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
 						</div>
 					</div>
 				</div>
-			</section>
-			<hr/>
-		</div>
+			</div>
+		</section>
+		<hr/>
+	</div>
 
-		<div class="content-block">
-			<section class="hero">
-				<div class="hero-body">
-					<div class="container">
-						<div class="content">
-							<h4 class="title is-4 is-spaced">Nightly Cost vs. Location Review Score</h4>
-							<!-- <script>
-							var margin = {top: 20, right: 20, bottom: 30, left: 40},
-									width = 960 - margin.left - margin.right,
-									height = 500 - margin.top - margin.bottom;
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4 is-spaced">Nightly Cost vs. Location Review Score</h4>
+						<script>
+						var margin = {top: 20, right: 20, bottom: 30, left: 40},
+						width = 960 - margin.left - margin.right,
+						height = 500 - margin.top - margin.bottom;
 
-							/*
-							* value accessor - returns the value to encode for a given data object.
-							* scale - maps value to a visual display encoding, such as a pixel position.
-							* map function - maps from data value to display value
-							* axis - sets up axis
-							*/
+						/*
+						* value accessor - returns the value to encode for a given data object.
+						* scale - maps value to a visual display encoding, such as a pixel position.
+						* map function - maps from data value to display value
+						* axis - sets up axis
+						*/
 
-							// setup x
-							var xValue = function(d) { return d.Price;}, // data -> value
-									xScale = d3.scale.linear().range([0, width]), // value -> display
-									xMap = function(d) { return xScale(xValue(d));}, // data -> display
-									xAxis = d3.svg.axis().scale(xScale).orient("bottom");
+						// setup x
+						var xValue = function(d) { return d.Price;}, // data -> value
+						xScale = d3.scale.linear().range([0, width]), // value -> display
+						xMap = function(d) { return xScale(xValue(d));}, // data -> display
+						xAxis = d3.svg.axis().scale(xScale).orient("bottom");
 
-							// setup y
-							var yValue = function(d) { return d.Score;}, // data -> value
-									yScale = d3.scale.linear().range([height, 0]), // value -> display
-									yMap = function(d) { return yScale(yValue(d));}, // data -> display
-									yAxis = d3.svg.axis().scale(yScale).orient("left");
+						// setup y
+						var yValue = function(d) { return d.Score;}, // data -> value
+						yScale = d3.scale.linear().range([height, 0]), // value -> display
+						yMap = function(d) { return yScale(yValue(d));}, // data -> display
+						yAxis = d3.svg.axis().scale(yScale).orient("left");
 
-							// setup fill color
-							var cValue = function(d) { return d.Neighborhood;},
-									color = d3.scale.category10();
+						// setup fill color
+						var cValue = function(d) { return d.Neighborhood;},
+						color = d3.scale.category10();
 
-							// add the graph canvas to the body of the webpage
-							var svg = d3.select("body").append("svg")
-									.attr("width", width + margin.left + margin.right)
-									.attr("height", height + margin.top + margin.bottom)
-									.append("g")
-									.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+						// add the graph canvas to the body of the webpage
+						var svg = d3.select("body").append("svg")
+						.attr("width", width + margin.left + margin.right)
+						.attr("height", height + margin.top + margin.bottom)
+						.append("g")
+						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
-							// add the tooltip area to the webpage
-							var tooltip = d3.select("body").append("div")
-									.attr("class", "tooltip")
-									.style("opacity", 0);
+						// add the tooltip area to the webpage
+						var tooltip = d3.select("body").append("div")
+						.attr("class", "tooltip")
+						.style("opacity", 0);
 
-							// load data
-							d3.csv("price_to_location.csv", function(error, data) {
+						// load data
+						d3.csv("price_to_location.csv", function(error, data) {
 
-								// change string (from CSV) into number format
-								data.forEach(function(d) {
-									d.Price = +d.Price;
-									d.Score = +d.Score;
-							//    console.log(d);
-								});
-
-								// don't want dots overlapping axis, so add in buffer to data domain
-								xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-								yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-								// x-axis
-								svg.append("g")
-										.attr("class", "x axis")
-										.attr("transform", "translate(0," + height + ")")
-										.call(xAxis)
-									.append("text")
-										.attr("class", "label")
-										.attr("x", width)
-										.attr("y", -6)
-										.style("text-anchor", "end")
-										.text("Price ($)/ Night");
-
-								// y-axis
-								svg.append("g")
-											.attr("class", "y axis")
-											.call(yAxis)
-										.append("text")
-											.attr("class", "label")
-											.attr("transform", "rotate(-90)")
-											.attr("y", 6)
-											.attr("dy", ".71em")
-											.style("text-anchor", "end")
-											.text("Location Review Score");
-
-								// draw dots
-								svg.selectAll(".dot")
-											.data(data)
-										.enter().append("circle")
-										.attr("class", "dot")
-										.attr("r", 3.5)
-										.attr("cx", xMap)
-										.attr("cy", yMap)
-										.style("fill", function(d) { return color(cValue(d));})
-										.on("mouseover", function(d) {
-											tooltip.transition()
-												.duration(200)
-												.style("opacity", .9);
-											tooltip.html(d.Neighborhood + "<br/> (" + xValue(d)
-											+ ", " + yValue(d) + ")")
-												.style("left", (d3.event.pageX + 5) + "px")
-												.style("top", (d3.event.pageY - 28) + "px");
-										})
-										.on("mouseout", function(d) {
-											tooltip.transition()
-												.duration(500)
-												.style("opacity", 0);
-										});
-
-								// draw legend
-								var legend = svg.selectAll(".legend")
-										.data(color.domain())
-									.enter().append("g")
-										.attr("class", "legend")
-										.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-								// draw legend colored rectangles
-								legend.append("rect")
-										.attr("x", width - 18)
-										.attr("width", 18)
-										.attr("height", 18)
-										.style("fill", color);
-
-								// draw legend text
-								legend.append("text")
-										.attr("x", width - 24)
-										.attr("y", 9)
-										.attr("dy", ".35em")
-										.style("text-anchor", "end")
-										.text(function(d) { return d;})
+							// change string (from CSV) into number format
+							data.forEach(function(d) {
+								d.Price = +d.Price;
+								d.Score = +d.Score;
+								//    console.log(d);
 							});
 
-						</script> -->
-							<table class="table">
-								<thead>
-									<tr>
-										<th>Neighborhood Name</th>
-										<th>Nightly Cost</th>
-										<th>Review Location Score</th>
-									</tr>
-								</thead>
-								<tbody>
-									<tr>
-										<th>Mission</th>
-										<td>212.18</td>
-										<td>9.556</td>
-									</tr>
-									<tr>
-										<th>West of Twin Peaks</th>
-										<td>201.74</td>
-										<td>9.624</td>
-									</tr>
-									<tr>
-										<th>Inner Richmond</th>
-										<td>230.97</td>
-										<td>9.661</td>
-									</tr>
-									<tr>
-										<th>Marina</th>
-										<td>321.35</td>
-										<td>9.902</td>
-									</tr>
-									<tr>
-										<th>Bayview</th>
-										<td>126.14</td>
-										<td>8.161</td>
-									</tr>
-									<tr>
-										<th>Visitacion Valley</th>
-										<td>126.89</td>
-										<td>9.0</td>
-									</tr>
-									<tr>
-										<th>Pacific Heights</th>
-										<td>331.81</td>
-										<td>9.885</td>
-									</tr>
-									<tr>
-										<th>Presidio Heights</th>
-										<td>551.16</td>
-										<td>9.667</td>
-									</tr>
-									<tr>
-										<th>South of Market</th>
-										<td>350.52</td>
-										<td>9.239</td>
-									</tr>
-									<tr>
-										<th>Glen Park</th>
-										<td>233.14</td>
-										<td>9.706</td>
-									</tr>
-									<tr>
-										<th>Potrero Hill</th>
-										<td>320.21</td>
-										<td>9.545</td>
-									</tr>
-									<tr>
-										<th>Castro/Upper Market</th>
-										<td>249.48</td>
-										<td>9.881</td>
-									</tr>
-									<tr>
-										<th>Twin Peaks</th>
-										<td>210.41</td>
-										<td>9.558</td>
-									</tr>
+							// don't want dots overlapping axis, so add in buffer to data domain
+							xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
+							yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
 
-								</tbody>
-							</table>
-							<div class="main-text">
-								<p>I was initally just going to compare the price/night of different neighborhoods to see which ones were most expensive. However, this information is easily found on the Airbnb website and I wanted to do something a bit more interesting.</p>
-								<p>I began doing some reasearch </p>
-							</div>
+							// x-axis
+							svg.append("g")
+							.attr("class", "x axis")
+							.attr("transform", "translate(0," + height + ")")
+							.call(xAxis)
+							.append("text")
+							.attr("class", "label")
+							.attr("x", width)
+							.attr("y", -6)
+							.style("text-anchor", "end")
+							.text("Price ($)/ Night");
+
+							// y-axis
+							svg.append("g")
+							.attr("class", "y axis")
+							.call(yAxis)
+							.append("text")
+							.attr("class", "label")
+							.attr("transform", "rotate(-90)")
+							.attr("y", 6)
+							.attr("dy", ".71em")
+							.style("text-anchor", "end")
+							.text("Location Review Score");
+
+							// draw dots
+							svg.selectAll(".dot")
+							.data(data)
+							.enter().append("circle")
+							.attr("class", "dot")
+							.attr("r", 3.5)
+							.attr("cx", xMap)
+							.attr("cy", yMap)
+							.style("fill", function(d) { return color(cValue(d));})
+							.on("mouseover", function(d) {
+								tooltip.transition()
+								.duration(200)
+								.style("opacity", .9);
+								tooltip.html(d.Neighborhood + "<br/> (" + xValue(d)
+								+ ", " + yValue(d) + ")")
+								.style("left", (d3.event.pageX + 5) + "px")
+								.style("top", (d3.event.pageY - 28) + "px");
+							})
+							.on("mouseout", function(d) {
+								tooltip.transition()
+								.duration(500)
+								.style("opacity", 0);
+							});
+
+							// draw legend
+							var legend = svg.selectAll(".legend")
+							.data(color.domain())
+							.enter().append("g")
+							.attr("class", "legend")
+							.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+							// draw legend colored rectangles
+							legend.append("rect")
+							.attr("x", width - 18)
+							.attr("width", 18)
+							.attr("height", 18)
+							.style("fill", color);
+
+							// draw legend text
+							legend.append("text")
+							.attr("x", width - 24)
+							.attr("y", 9)
+							.attr("dy", ".35em")
+							.style("text-anchor", "end")
+							.text(function(d) { return d;})
+						});
+
+						</script>
+						<table class="table">
+							<thead>
+								<tr>
+									<th>Neighborhood Name</th>
+									<th>Nightly Cost</th>
+									<th>Review Location Score</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<th>Mission</th>
+									<td>212.18</td>
+									<td>9.556</td>
+								</tr>
+								<tr>
+									<th>West of Twin Peaks</th>
+									<td>201.74</td>
+									<td>9.624</td>
+								</tr>
+								<tr>
+									<th>Inner Richmond</th>
+									<td>230.97</td>
+									<td>9.661</td>
+								</tr>
+								<tr>
+									<th>Marina</th>
+									<td>321.35</td>
+									<td>9.902</td>
+								</tr>
+								<tr>
+									<th>Bayview</th>
+									<td>126.14</td>
+									<td>8.161</td>
+								</tr>
+								<tr>
+									<th>Visitacion Valley</th>
+									<td>126.89</td>
+									<td>9.0</td>
+								</tr>
+								<tr>
+									<th>Pacific Heights</th>
+									<td>331.81</td>
+									<td>9.885</td>
+								</tr>
+								<tr>
+									<th>Presidio Heights</th>
+									<td>551.16</td>
+									<td>9.667</td>
+								</tr>
+								<tr>
+									<th>South of Market</th>
+									<td>350.52</td>
+									<td>9.239</td>
+								</tr>
+								<tr>
+									<th>Glen Park</th>
+									<td>233.14</td>
+									<td>9.706</td>
+								</tr>
+								<tr>
+									<th>Potrero Hill</th>
+									<td>320.21</td>
+									<td>9.545</td>
+								</tr>
+								<tr>
+									<th>Castro/Upper Market</th>
+									<td>249.48</td>
+									<td>9.881</td>
+								</tr>
+								<tr>
+									<th>Twin Peaks</th>
+									<td>210.41</td>
+									<td>9.558</td>
+								</tr>
+
+							</tbody>
+						</table>
+						<div class="main-text">
+							<p>I was initally just going to compare the price/night of different neighborhoods to see which ones were most expensive. However, this information is easily found on the Airbnb website and I wanted to do something a bit more interesting.</p>
+							<p>I began doing some reasearch </p>
 						</div>
 					</div>
 				</div>
-			</section>
-			<hr/>
-		</div>
-		<!-- end of example block -->
+			</div>
+		</section>
+		<hr/>
+	</div>
+	<!-- end of example block -->
 
-		<!-- example content block -->
-		<div class="content-block">
-			<section class="hero">
-				<div class="hero-body">
-					<div class="container">
-						<div class="content">
-							<h4 class="title is-4">Quick Start</h4>
-							<div class="main-text">
-								<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-								<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
-							</div>
-							<div class="pre-wrapper">
-								<pre>
-									&lt;!DOCTYPE html&gt;
-									&lt;html&gt;
-									&lt;head&gt;
-									&lt;title&gt;Hello World&lt;/title&gt;
-									&lt;/head&gt;
-									&lt;body&gt;
-									&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-									&lt;/body&gt;
-									&lt;/html&gt;
-									&lt;!DOCTYPE html&gt;
-									&lt;html&gt;
-									&lt;head&gt;
-									&lt;title&gt;Hello World&lt;/title&gt;
-									&lt;/head&gt;
-									&lt;body&gt;
-									&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-									&lt;/body&gt;
-									&lt;/html&gt;
-								</pre>
-							</div>
+	<!-- example content block -->
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Quick Start</h4>
+						<div class="main-text">
+							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
+							<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
+						</div>
+						<div class="pre-wrapper">
+							<pre>
+								&lt;!DOCTYPE html&gt;
+								&lt;html&gt;
+								&lt;head&gt;
+								&lt;title&gt;Hello World&lt;/title&gt;
+								&lt;/head&gt;
+								&lt;body&gt;
+								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
+								&lt;/body&gt;
+								&lt;/html&gt;
+								&lt;!DOCTYPE html&gt;
+								&lt;html&gt;
+								&lt;head&gt;
+								&lt;title&gt;Hello World&lt;/title&gt;
+								&lt;/head&gt;
+								&lt;body&gt;
+								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
+								&lt;/body&gt;
+								&lt;/html&gt;
+							</pre>
 						</div>
 					</div>
 				</div>
-			</section>
-			<hr/>
-		</div>
-		<!-- end of example block -->
+			</div>
+		</section>
+		<hr/>
+	</div>
+	<!-- end of example block -->
 
-		<!-- example content block -->
-		<div class="content-block">
-			<section class="hero">
-				<div class="hero-body">
-					<div class="container">
-						<div class="content">
-							<h4 class="title is-4">Methods</h4>
-							<div class="main-text">
-								<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-								<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
-							</div>
-							<div class="pre-wrapper">
-								<p><code>somemethod.sub.sub</code></p>
-								<pre>
-									&lt;!DOCTYPE html&gt;
-									&lt;html&gt;
-									&lt;head&gt;
-									&lt;title&gt;Hello World&lt;/title&gt;
-									&lt;/head&gt;
-									&lt;body&gt;
-									&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-									&lt;/body&gt;
-									&lt;/html&gt;
-								</pre>
-							</div>
-							<div class="pre-wrapper">
-								<p><code>anothermethod.sub.sub.orange</code></p>
-								<pre>
-									&lt;!DOCTYPE html&gt;
-									&lt;html&gt;
-									&lt;head&gt;
-									&lt;title&gt;Hello World&lt;/title&gt;
-									&lt;/head&gt;
-									&lt;body&gt;
-									&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-									&lt;/body&gt;
-									&lt;/html&gt;
-								</pre>
-							</div>
+	<!-- example content block -->
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Methods</h4>
+						<div class="main-text">
+							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
+							<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
+						</div>
+						<div class="pre-wrapper">
+							<p><code>somemethod.sub.sub</code></p>
+							<pre>
+								&lt;!DOCTYPE html&gt;
+								&lt;html&gt;
+								&lt;head&gt;
+								&lt;title&gt;Hello World&lt;/title&gt;
+								&lt;/head&gt;
+								&lt;body&gt;
+								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
+								&lt;/body&gt;
+								&lt;/html&gt;
+							</pre>
+						</div>
+						<div class="pre-wrapper">
+							<p><code>anothermethod.sub.sub.orange</code></p>
+							<pre>
+								&lt;!DOCTYPE html&gt;
+								&lt;html&gt;
+								&lt;head&gt;
+								&lt;title&gt;Hello World&lt;/title&gt;
+								&lt;/head&gt;
+								&lt;body&gt;
+								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
+								&lt;/body&gt;
+								&lt;/html&gt;
+							</pre>
 						</div>
 					</div>
 				</div>
-			</section>
-			<hr/>
-		</div>
-		<!-- end of example block -->
+			</div>
+		</section>
+		<hr/>
+	</div>
+	<!-- end of example block -->
 
-		<!-- example content block -->
-		<div class="content-block">
-			<section class="hero">
-				<div class="hero-body">
-					<div class="container">
-						<div class="content">
-							<h4 class="title is-4">Contact</h4>
-							<div class="main-text">
-								<p>Submission for Capital One Software Engineering Summit.</p>
-								<p>Glenn Ren</p>
-								<p>Email: <a>glenn.y.ren@gmail.com</a></p>
-								<p>Website: <a>glennren.github.io</a></p>
-							</div>
+	<!-- example content block -->
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Contact</h4>
+						<div class="main-text">
+							<p>Submission for Capital One Software Engineering Summit.</p>
+							<p>Glenn Ren</p>
+							<p>Email: <a>glenn.y.ren@gmail.com</a></p>
+							<p>Website: <a>glennren.github.io</a></p>
 						</div>
 					</div>
 				</div>
-			</section>
-		</div>
-		<!-- end of example block -->
-	</body>
+			</div>
+		</section>
+	</div>
+	<!-- end of example block -->
+</body>
 </html>
