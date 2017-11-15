@@ -3,42 +3,19 @@
 <head>
 	<title>Data Visualizations</title>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
-	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script>
-	$.ajax({
-		url: "https://data.applicant94.hasura-app.io/v1/query",
-		contentType: "application/json",
-		headers: {
-			"Authorization": "Bearer 9c352ddeb00a0f3f79250e87d13afb699a06d4fd1210b4cc"
-		},
-		data: JSON.stringify({
-			"type": "select",
-			"args": {
-				"table": "listings",
-				"columns": [
-					"latitude",
-					"longitude",
-					"price"
-				]
-			}
-		}),
-		type: "POST",
-		dataType: "json"
-	}).done(function(json) {
-		console.log(json)
-	}).fail(function(xhr, status, errorThrown) {
-		console.log("Error: " + errorThrown);
-		console.log("Status: " + status);
-		console.dir(xhr);
-	});
-	</script>
-	<style>
-		#nightly-price-map {
-			height: 100%;
-		}
-	</style>
+	<script src="./scripts/lib/Chart.Core.js"></script>
+	<script src="./scripts/lib/Chart.Scatter.js"></script>
+	<!-- <script src="./scripts/utils.js"></script> -->
+	<script src="./scripts/getListings.js"></script>
+	<!-- <style>
+	#nightly-price-map {
+	height: 100%;
+}
+</style> -->
 </head>
 <body>
 	<nav class="navbar is-transparent">
@@ -50,14 +27,14 @@
 			</div>
 		</div>
 	</nav>
-	<section class="hero">
+	<section class="hero is-primary">
 		<div class="hero-body">
 			<div class="container has-text-centered">
 				<h1 class="title">
 					Data Visualizations
 				</h1>
 				<h2 class="subtitle">
-					You know, those 📊 things!
+					Graph all the things! 📈
 				</h2>
 			</div>
 		</div>
@@ -68,37 +45,9 @@
 			<div class="hero-body">
 				<div class="container">
 					<div class="content">
-						<h4 class="title is-4">Nightly Prices</h4>
+						<h4 class="title is-4">Which locations are more expensive? Which locations are less?</h4>
 						<div id="nightly-price-map"></div>
-						<script>
-						var map;
-						function initMap() {
-							map = new google.maps.Map(document.getElementById('nightly-price-map'), {
-								zoom: 2,
-								center: new google.maps.LatLng(2.8,-187.3),
-								mapTypeId: 'terrain'
-							});
-
-							// Create a <script> tag and set the USGS URL as the source.
-							var script = document.createElement('script');
-							// This example uses a local copy of the GeoJSON stored at
-							// http://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/2.5_week.geojsonp
-							script.src = 'https://developers.google.com/maps/documentation/javascript/examples/json/earthquake_GeoJSONP.js';
-							document.getElementsByTagName('head')[0].appendChild(script);
-						}
-
-						// Loop through the results array and place a marker for each set of coordinates
-						window.eqfeed_callback = function(results) {
-							for (var i = 0; i < results.features.length; i++) {
-								var coords = results.features[i].geometry.coordinates;
-								var latLng = new google.maps.LatLng(coords[1], coords[0]);
-								var marker = new google.maps.Marker({
-									position: latLng,
-									map: map
-								});
-							}
-						}
-						</script>
+						<script src="./scripts/nightlyMap.js"></script>
 						<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2mK7Yi91jq40oHU_Yl17xVDOVDb2Hc0&callback=initMap"></script>
 						<div class="main-text">
 							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed. Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
@@ -111,256 +60,67 @@
 	</div>
 
 	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4 is-spaced">Nightly Cost vs. Location Review Score</h4>
-						<script src="https://d3js.org/d3.v3.min.js"></script>
-						<script>
-						var margin = {top: 20, right: 20, bottom: 30, left: 40},
-						width = 960 - margin.left - margin.right,
-						height = 800 - margin.top - margin.bottom;
-
-						/*
-						* value accessor - returns the value to encode for a given data object.
-						* scale - maps value to a visual display encoding, such as a pixel position.
-						* map function - maps from data value to display value
-						* axis - sets up axis
-						*/
-
-						// setup x
-						var xValue = function(d) { return d.Price;}, // data -> value
-						xScale = d3.scale.linear().range([0, width]), // value -> display
-						xMap = function(d) { return xScale(xValue(d));}, // data -> display
-						xAxis = d3.svg.axis().scale(xScale).orient("bottom");
-
-						// setup y
-						var yValue = function(d) { return d.Score;}, // data -> value
-						yScale = d3.scale.linear().range([height, 0]), // value -> display
-						yMap = function(d) { return yScale(yValue(d));}, // data -> display
-						yAxis = d3.svg.axis().scale(yScale).orient("left");
-
-						// setup fill color
-						var cValue = function(d) { return d.Neighborhood;},
-						color = d3.scale.category10();
-
-						// add the graph canvas to the body of the webpage
-						var svg = d3.select("body").append("svg")
-						.attr("width", width + margin.left + margin.right)
-						.attr("height", height + margin.top + margin.bottom)
-						.append("g")
-						.attr("transform", "translate(" + margin.left + "," + margin.top + ")");
-
-						// add the tooltip area to the webpage
-						var tooltip = d3.select("body").append("div")
-						.attr("class", "tooltip")
-						.style("opacity", 0);
-
-						// load data
-						d3.csv("price_to_location.csv", function(error, data) {
-
-							// change string (from CSV) into number format
-							data.forEach(function(d) {
-								d.Price = +d.Price;
-								d.Score = +d.Score;
-								//    console.log(d);
-							});
-
-							// don't want dots overlapping axis, so add in buffer to data domain
-							xScale.domain([d3.min(data, xValue)-1, d3.max(data, xValue)+1]);
-							yScale.domain([d3.min(data, yValue)-1, d3.max(data, yValue)+1]);
-
-							// x-axis
-							svg.append("g")
-							.attr("class", "x axis")
-							.attr("transform", "translate(0," + height + ")")
-							.call(xAxis)
-							.append("text")
-							.attr("class", "label")
-							.attr("x", width)
-							.attr("y", -6)
-							.style("text-anchor", "end")
-							.text("Price ($)/ Night");
-
-							// y-axis
-							svg.append("g")
-							.attr("class", "y axis")
-							.call(yAxis)
-							.append("text")
-							.attr("class", "label")
-							.attr("transform", "rotate(-90)")
-							.attr("y", 6)
-							.attr("dy", ".71em")
-							.style("text-anchor", "end")
-							.text("Location Review Score");
-
-							// draw dots
-							svg.selectAll(".dot")
-							.data(data)
-							.enter().append("circle")
-							.attr("class", "dot")
-							.attr("r", 3.5)
-							.attr("cx", xMap)
-							.attr("cy", yMap)
-							.style("fill", function(d) { return color(cValue(d));})
-							.on("mouseover", function(d) {
-								tooltip.transition()
-								.duration(200)
-								.style("opacity", .9);
-								tooltip.html(d.Neighborhood + "<br/> (" + xValue(d)
-								+ ", " + yValue(d) + ")")
-								.style("left", (d3.event.pageX + 5) + "px")
-								.style("top", (d3.event.pageY - 28) + "px");
-							})
-							.on("mouseout", function(d) {
-								tooltip.transition()
-								.duration(500)
-								.style("opacity", 0);
-							});
-
-							// draw legend
-							var legend = svg.selectAll(".legend")
-							.data(color.domain())
-							.enter().append("g")
-							.attr("class", "legend")
-							.attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
-
-							// draw legend colored rectangles
-							legend.append("rect")
-							.attr("x", width - 18)
-							.attr("width", 18)
-							.attr("height", 18)
-							.style("fill", color);
-
-							// draw legend text
-							legend.append("text")
-							.attr("x", width - 24)
-							.attr("y", 9)
-							.attr("dy", ".35em")
-							.style("text-anchor", "end")
-							.text(function(d) { return d;})
-						});
-
-						</script>
-						<div class="main-text">
-							<p>I was initally just going to compare the price/night of different neighborhoods to see which ones were most expensive. However, this information is easily found on the Airbnb website and I wanted to do something a bit more interesting.</p>
-							<p>I began doing some reasearch </p>
-						</div>
+		<!-- <section class="hero">
+		<div class="hero-body"> -->
+		<div class="container">
+			<div class="content">
+				<h4 class="title is-4 is-spaced">Is it worth it to pay more for a home in a better area?</h4>
+				<div class="columns">
+					<div class="column is-one-half is-centered">
+						<canvas id="myChart" width="700" height="400"></canvas>
+						<script src="./scripts/createLocationChart.js"></script>
+					</div>
+					<div class="column is-text-centered is-one-half">
+						<p>I was initally just going to compare the price/night of different neighborhoods to see which ones were most expensive. However, this information is easily found on the Airbnb website and I wanted to do something a bit more interesting.</p>
+						<p>I began doing some reasearch </p>
 					</div>
 				</div>
 			</div>
-		</section>
-		<hr/>
-	</div>
-	<!-- end of example block -->
+		</div>
+		<!-- </div>
+	</section> -->
+	<hr/>
+</div>
+<!-- end of example block -->
 
-	<!-- example content block -->
-	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4">Quick Start</h4>
-						<div class="main-text">
-							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-							<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
-						</div>
-						<div class="pre-wrapper">
-							<pre>
-								&lt;!DOCTYPE html&gt;
-								&lt;html&gt;
-								&lt;head&gt;
-								&lt;title&gt;Hello World&lt;/title&gt;
-								&lt;/head&gt;
-								&lt;body&gt;
-								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-								&lt;/body&gt;
-								&lt;/html&gt;
-								&lt;!DOCTYPE html&gt;
-								&lt;html&gt;
-								&lt;head&gt;
-								&lt;title&gt;Hello World&lt;/title&gt;
-								&lt;/head&gt;
-								&lt;body&gt;
-								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-								&lt;/body&gt;
-								&lt;/html&gt;
-							</pre>
-						</div>
+<!-- example content block -->
+<div class="content-block">
+	<section class="hero">
+		<div class="hero-body">
+			<div class="container">
+				<div class="content">
+					<h4 class="title is-4">Where are the "hottest" areas?</h4>
+					<div class="main-text">
+						<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
+						<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</section>
+	<hr/>
+</div>
+<!-- end of example block -->
+
+<!-- example content block -->
+<div class="content-block">
+	<section class="hero">
+		<div class="hero-body">
+			<div class="container">
+				<div class="content">
+					<h4 class="title is-4">Contact</h4>
+					<div class="main-text">
+						<p>Submission for Capital One Software Engineering Summit.</p>
+						<p>Glenn Ren</p>
+						<p>Email: <a>glenn.y.ren@gmail.com</a></p>
+						<p>Website: <a>glennren.github.io</a></p>
 					</div>
 				</div>
 			</div>
-		</section>
-		<hr/>
-	</div>
-	<!-- end of example block -->
-
-	<!-- example content block -->
-	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4">Methods</h4>
-						<div class="main-text">
-							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-							<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
-						</div>
-						<div class="pre-wrapper">
-							<p><code>somemethod.sub.sub</code></p>
-							<pre>
-								&lt;!DOCTYPE html&gt;
-								&lt;html&gt;
-								&lt;head&gt;
-								&lt;title&gt;Hello World&lt;/title&gt;
-								&lt;/head&gt;
-								&lt;body&gt;
-								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-								&lt;/body&gt;
-								&lt;/html&gt;
-							</pre>
-						</div>
-						<div class="pre-wrapper">
-							<p><code>anothermethod.sub.sub.orange</code></p>
-							<pre>
-								&lt;!DOCTYPE html&gt;
-								&lt;html&gt;
-								&lt;head&gt;
-								&lt;title&gt;Hello World&lt;/title&gt;
-								&lt;/head&gt;
-								&lt;body&gt;
-								&lt;p&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec viverra nec nulla vitae mllis.&lt;/p&gt;
-								&lt;/body&gt;
-								&lt;/html&gt;
-							</pre>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<hr/>
-	</div>
-	<!-- end of example block -->
-
-	<!-- example content block -->
-	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4">Contact</h4>
-						<div class="main-text">
-							<p>Submission for Capital One Software Engineering Summit.</p>
-							<p>Glenn Ren</p>
-							<p>Email: <a>glenn.y.ren@gmail.com</a></p>
-							<p>Website: <a>glennren.github.io</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-	</div>
-	<!-- end of example block -->
+		</div>
+	</section>
+</div>
+<!-- end of example block -->
 </body>
 </html>

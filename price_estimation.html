@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Price Estimation</title>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="css/style.css">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="./scripts/getEstimationListings.js"></script>
+</head>
+
+<body>
+	<nav class="navbar is-transparent">
+		<div id="navbarExampleTransparentExample" class="navbar-menu">
+			<div class="navbar-start">
+				<a class="navbar-item" href="index.html">
+					&#65513; Back
+				</a>
+			</div>
+		</div>
+	</nav>
+	<section class="hero is-primary">
+		<div class="hero-body">
+			<div class="container has-text-centered">
+				<h1 class="title">
+					Price Estimation Tool
+				</h1>
+				<h2 class="subtitle">
+					Get an accurate quote for your home!
+				</h2>
+			</div>
+		</div>
+	</section>
+
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title">Where's your place located?</h4>
+						<div class="field">
+							<label class="label">Latitude</label>
+							<div class="control">
+								<input id="latitude" class="input" type="text" placeholder="eg. 38.886878">
+							</div>
+						</div>
+						<div class="field">
+							<label class="label">Longitude</label>
+							<div class="control">
+								<input id="longitude" class="input" type="text" placeholder="eg. -77.094650">
+							</div>
+						</div>
+						<br>
+						<h4 class="title">What type of place do you have?</h4>
+						<div class="field is-grouped">
+							<div class="control">
+								<div id="room-type" class="select">
+									<select>
+										<option>Private room</option>
+										<option>Entire home/apt</option>
+										<option>Shared room</option>
+									</select>
+								</div>
+							</div>
+							<div class="control">
+								<label class="label">in a</label>
+							</div>
+							<div class="control">
+								<div id="property-type" class="select">
+									<select>
+										<option>Apartment</option>
+										<option>House</option>
+										<option>Townhouse</option>
+										<option>Condominium</option>
+									</select>
+								</div>
+							</div>
+						</div>
+						<br>
+						<div class="field">
+							<p class="control">
+								<a class="button is-primary" onclick="getUserInput(); return false;">
+									Calculate
+								</a>
+							</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+		<hr/>
+	</div>
+
+	<section class="hero">
+		<div class="hero-body">
+			<div class="container has-text-centered">
+				<h2 class="subtitle">
+					You should set the price at:
+				</h2>
+				<h1 id="estimated-price" class="title">
+					??
+				</h1>
+			</div>
+		</div>
+	</section>
+
+</div>
+
+</body>
+</html>
