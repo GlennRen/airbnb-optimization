@@ -9,7 +9,6 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="./scripts/lib/Chart.Core.js"></script>
 	<script src="./scripts/lib/Chart.Scatter.js"></script>
-	<!-- <script src="./scripts/utils.js"></script> -->
 	<script src="./scripts/getListings.js"></script>
 	<!-- <style>
 	#nightly-price-map {
@@ -45,12 +44,16 @@
 			<div class="hero-body">
 				<div class="container">
 					<div class="content">
-						<h4 class="title is-4">Which locations are more expensive? Which locations are less?</h4>
-						<div id="nightly-price-map"></div>
-						<script src="./scripts/nightlyMap.js"></script>
-						<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2mK7Yi91jq40oHU_Yl17xVDOVDb2Hc0&callback=initMap"></script>
-						<div class="main-text">
-							<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed. Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
+						<h4 class="title is-4 is-spaced">Is it worth it to pay more for a home in a better area?</h4>
+						<div class="columns">
+							<div class="column is-one-half is-centered">
+								<canvas id="myChart" width="700" height="400"></canvas>
+								<script src="./scripts/createLocationChart.js"></script>
+							</div>
+							<div class="column is-text-centered is-one-half">
+								<p><strong>Cost($) vs. Average Location Score</strong></p>
+								<p></p>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -60,67 +63,40 @@
 	</div>
 
 	<div class="content-block">
-		<!-- <section class="hero">
-		<div class="hero-body"> -->
-		<div class="container">
-			<div class="content">
-				<h4 class="title is-4 is-spaced">Is it worth it to pay more for a home in a better area?</h4>
-				<div class="columns">
-					<div class="column is-one-half is-centered">
-						<canvas id="myChart" width="700" height="400"></canvas>
-						<script src="./scripts/createLocationChart.js"></script>
-					</div>
-					<div class="column is-text-centered is-one-half">
-						<p>I was initally just going to compare the price/night of different neighborhoods to see which ones were most expensive. However, this information is easily found on the Airbnb website and I wanted to do something a bit more interesting.</p>
-						<p>I began doing some reasearch </p>
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Which locations are more expensive? Which locations are less?</h4>
+						<div id="nightly-price-map"></div>
+						<script src="./scripts/nightlyMap.js"></script>
+						<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2mK7Yi91jq40oHU_Yl17xVDOVDb2Hc0&callback=initMap"></script>
+						<div class="main-text">
+							<p></p>
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<!-- </div>
-	</section> -->
-	<hr/>
-</div>
-<!-- end of example block -->
+		</section>
+		<hr/>
+	</div>
 
-<!-- example content block -->
-<div class="content-block">
-	<section class="hero">
-		<div class="hero-body">
-			<div class="container">
-				<div class="content">
-					<h4 class="title is-4">Where are the "hottest" areas?</h4>
-					<div class="main-text">
-						<p> Nunc elementum cursus tincidunt. Praesent sit amet ex sapien. Curabitur auctor nunc at elit rutrum vestibulum. Etiam at lacus ante. Phasellus scelerisque nibh id leo interdum, nec ultrices elit placerat. Etiam molestie mi a volutpat ultricies. Morbi vel pellentesque enim, a blandit enim. Cras egestas sapien felis, sit amet accumsan erat efficitur sed.</p>
-						<p>Praesent scelerisque leo magna, et tincidunt nunc dictum vitae. Proin finibus odio in massa lobortis, eu sodales urna ornare. Proin eu vestibulum libero, ultrices laoreet velit. Vestibulum felis nisl, convallis nec tincidunt in, bibendum sed magna. Fusce mi ligula, consequat a nibh at, luctus fermentum lacus. Vivamus ultricies augue nec nisi fermentum faucibus. Phasellus sollicitudin est neque. Phasellus aliquam a ipsum eget mattis. Duis ut consequat sem, in sagittis lectus. Etiam et condimentum urna, nec placerat urna. Nulla pharetra libero vitae hendrerit pretium. Praesent tellus mauris, facilisis et neque id, fermentum consequat erat. Ut aliquet erat id orci aliquet ornare. Morbi in mi mollis, tempor velit ut, suscipit enim. Ut at magna magna.</p>
-					</div>
 
-				</div>
-			</div>
-		</div>
-	</section>
-	<hr/>
-</div>
-<!-- end of example block -->
+	<div class="content-block">
+		<section class="hero">
+			<div class="hero-body">
+				<div class="container">
+					<div class="content">
+						<h4 class="title is-4">Where are the "hottest" areas?</h4>
+						<div class="main-text">
+							<p></p>
+						</div>
 
-<!-- example content block -->
-<div class="content-block">
-	<section class="hero">
-		<div class="hero-body">
-			<div class="container">
-				<div class="content">
-					<h4 class="title is-4">Contact</h4>
-					<div class="main-text">
-						<p>Submission for Capital One Software Engineering Summit.</p>
-						<p>Glenn Ren</p>
-						<p>Email: <a>glenn.y.ren@gmail.com</a></p>
-						<p>Website: <a>glennren.github.io</a></p>
 					</div>
 				</div>
 			</div>
-		</div>
-	</section>
-</div>
-<!-- end of example block -->
+		</section>
+		<hr/>
+	</div>
 </body>
 </html>

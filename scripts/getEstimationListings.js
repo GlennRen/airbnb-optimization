@@ -71,13 +71,13 @@ function getListings(userLat, userLong, roomType, propertyType)
 
 		var total = 0;
 		for (var i = 0; i < 5; i++) {
-			console.log(newData[i].price);
+			// console.log(newData[i].price);
 			total += parseFloat(newData[i].price.replace('$',''));
 		}
 		var average = total / 5;
-		console.log(average);
-		console.log(newData);
-		$("#estimated-price").text("$" + average.toFixed(2));
+		// console.log(average);
+		// console.log(newData);
+		$("#estimated-price").text("$" + (average * 7).toFixed(2));
 	}).fail(function(xhr, status, errorThrown) {
 		console.log("Error: " + errorThrown);
 		console.log("Status: " + status);
