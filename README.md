@@ -21,13 +21,13 @@ Price &amp; bookings optimization tool for Airbnb. Submission for **Capital One 
 * [Cleaned](https://github.com/GlennRen/airbnb-optimization/tree/master/data/cleaned), filtered, & [stored](https://imgur.com/a/EWXtK) given data
 
 ## Strategy
-#### 1. Visualize the data:
+### 1. Visualize the data:
 * **Nightly Prices vs. Location Review Score**
 * **Nightly Price Heat Map**
 * **Review/Month Heat Map**
 	* If I was a host looking to buy a new house (to rent out), I would want to buy a house in high demand (assuming more reviews/month correlates to more customers).
 
-#### 2. Price estimation:
+### 2. Price estimation:
 Estimate the weekly average income a homeowner could make w/ Airbnb.
 
 **Inputs:** latitude, longitude, property type, room type
@@ -45,7 +45,7 @@ Estimate the weekly average income a homeowner could make w/ Airbnb.
 * Income meant gross income (revenue), not net income (profit).
 * Predicted weekly income is assuming that the listing is booked every day of the week. I attempted to figure out the average nights/week that a listing is booked based on the location and reviews per month (another possible assumption: more reviews correlates to more bookings). Possible improvement in future.
 
-#### 3. Booking Optimization:
+### 3. Booking Optimization:
 Optimize the nightly price for maximum # of bookings.
 
 **Inputs:** latitude, longitude, property type, room type
