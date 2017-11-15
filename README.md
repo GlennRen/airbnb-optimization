@@ -7,7 +7,6 @@ Price &amp; bookings optimization tool for Airbnb. Submission for **Capital One 
 - [Stack Outline](#stack-outline)
 - [Strategy](#strategy)
 - [Bonuses](#bonuses)
-- [Case Study/Strategy](#case-study)
 
 ## Stack outline
 **Front End**
