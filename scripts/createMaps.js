@@ -1,13 +1,17 @@
 var map, heatmap;
 
 function initMap() {
-	console.log("RUN");
 	map = new google.maps.Map(document.getElementById('density-map'), {
 		zoom: 12,
 		center: {lat: 37.775, lng: -122.434},
 		mapTypeId: 'roadmap'
 	});
 	getAllListings();
+	map2 = new google.maps.Map(document.getElementById('reviews-map'), {
+		zoom: 12,
+		center: {lat: 37.775, lng: -122.434},
+		mapTypeId: 'roadmap'
+	});
 }
 
 function getAllListings() {
@@ -23,7 +27,8 @@ function getAllListings() {
 				"table": "listings",
 				"columns": [
 					"latitude",
-					"longitude"
+					"longitude",
+					"reviews_per_month"
 				]
 			}
 		}),
@@ -31,19 +36,28 @@ function getAllListings() {
 		dataType: "json"
 	}).done(function(allListings) {
 		var heatMapData = [];
+		var reviewsMapData = [];
 
 		for (var i = 0; i < allListings.length; i++) {
 			var listing = allListings[i];
-			console.log(listing["latitude"]);
-			console.log(listing["longitude"])
-
 			var latLong = new google.maps.LatLng(listing["latitude"], listing["longitude"]);
+
+			var reviewLatLong = {}
+			reviewLatLong.location = new google.maps.LatLng(listing["latitude"], listing["longitude"]);
+			reviewLatLong.weight = parseFloat(listing["reviews_per_month"]);
+
 			heatMapData.push(latLong);
+			reviewsMapData.push(reviewLatLong);
 		}
 
 		heatmap = new google.maps.visualization.HeatmapLayer({
 			data: heatMapData,
 			map: map
+		});
+
+		heatmap2 = new google.maps.visualization.HeatmapLayer({
+			data: reviewsMapData,
+			map: map2
 		});
 	}).fail(function(xhr, status, errorThrown) {
 		console.log("Error: " + errorThrown);

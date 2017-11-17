@@ -3,6 +3,10 @@
 #density-map {
 	height: 500px;
 }
+
+#reviews-map {
+	height: 500px;
+}
 /* Optional: Makes the sample page fill the window. */
 html, body {
 	height: 100%;
