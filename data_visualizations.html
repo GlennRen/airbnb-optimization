@@ -5,16 +5,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.1/css/bulma.min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/map.css">
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-	<script src="./scripts/lib/Chart.Core.js"></script>
-	<script src="./scripts/lib/Chart.Scatter.js"></script>
-	<script src="./scripts/getListings.js"></script>
-	<!-- <style>
-	#nightly-price-map {
-	height: 100%;
-}
-</style> -->
+	<script src="scripts/lib/Chart.Core.js"></script>
+	<script src="scripts/lib/Chart.Scatter.js"></script>
 </head>
 <body>
 	<nav class="navbar is-transparent">
@@ -39,56 +35,37 @@
 		</div>
 	</section>
 
+
 	<div class="content-block">
 		<section class="hero">
 			<div class="hero-body">
 				<div class="container">
 					<div class="content">
-						<h4 class="title is-4 is-spaced">Is it worth it to pay more for a home in a better area?</h4>
+						<div class="columns">
+							<div class="column is-one-half is-centered is-text-centered">
+								<h4 class="title is-4 is-spaced">Listing Density</h4>
+								<p><strong>Which areas have the most listings?</strong></p>
+								<div id="density-map"></div>
+								<script async defer
+								src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2mK7Yi91jq40oHU_Yl17xVDOVDb2Hc0&libraries=visualization&callback=initMap">
+								</script>
+								<script src="scripts/createMaps.js"></script>
+							</div>
+							<div class="column is-one-half is-centered is-text-centered">
+								<h4 class="title is-4">Frequently Reviewed</h4>
+								<p><strong>Where are the "hottest" areas?</strong></p>
+								<!-- <div id="map"></div> -->
+							</div>
+						</div>
+						<br>
 						<div class="columns">
 							<div class="column is-centered is-text-centered">
-								<p><strong>Cost($) vs. Average Location Score</strong></p>
+								<h4 class="title is-4 is-spaced">Cost($) vs. Average Location Score</h4>
+								<p><strong>Is it worth it to pay more for a home in a better area?</strong></p>
 								<canvas id="myChart" width="700" height="400"></canvas>
 								<script src="./scripts/createLocationChart.js"></script>
 							</div>
 						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<hr/>
-	</div>
-
-	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4">Which locations are more expensive? Which locations are less?</h4>
-						<div id="nightly-price-map"></div>
-						<script src="./scripts/nightlyMap.js"></script>
-						<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCj2mK7Yi91jq40oHU_Yl17xVDOVDb2Hc0&callback=initMap"></script>
-						<div class="main-text">
-							<p></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-		<hr/>
-	</div>
-
-
-	<div class="content-block">
-		<section class="hero">
-			<div class="hero-body">
-				<div class="container">
-					<div class="content">
-						<h4 class="title is-4">Where are the "hottest" areas?</h4>
-						<div class="main-text">
-							<p></p>
-						</div>
-
 					</div>
 				</div>
 			</div>
